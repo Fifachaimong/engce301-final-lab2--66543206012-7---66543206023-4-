@@ -1,19 +1,19 @@
 # Microservices Scale-Up + Cloud Deploy (Railway)
 
 ## 👤 จัดทำโดย
-1. **นางสาว วชิรานีย์ ประเสริฐศรี** รหัสนักศึกษา 66543206052-3
-2. **นายอานุภาพ เฑียรประยูร** รหัสนักศึกษา 66543206094-5
+1. **นายนฤชิต ไชยมงคล** รหัสนักศึกษา 66543206012-7
+2. **นายจิรภัทร จันทร์เทพ** รหัสนักศึกษา 66543206023-4
 
 ## URL ของ Service บน Production (Railway)
 
-- **Auth Service**: [https://auth-production-1800.up.railway.app](https://auth-production-1800.up.railway.app)
-- **Task Service**: [https://tasks-production-c3dd.up.railway.app](https://tasks-production-c3dd.up.railway.app)
-- **User Service**: [https://users-production-6963.up.railway.app](https://users-production-6963.up.railway.app)
+- **Auth Service**: [https://auth-production-1800.up.railway.app](https://auth-production-ab99.up.railway.app)
+- **Task Service**: [https://tasks-production-c3dd.up.railway.app](https://task-production-93b7.up.railway.app)
+- **User Service**: [https://users-production-6963.up.railway.app](https://user-production-a874.up.railway.app)
 
-- **Frontend URL**: [https://engce301-final-lab2-production.up.railway.app](https://engce301-final-lab2-production.up.railway.app)
+- **Frontend URL**: [https://engce301-final-lab2-production.up.railway.app](https://engce301-final-lab2-66543206012-7-66543206023-production.up.railway.app)
 
 **Bonus** Gateway nginx รวมทุก Service และ Frontend (พร้อม Rate Limit)
-- **Gateway URL**: [https://engce301-final-lab2-production.up.railway.app](https://engce301-final-lab2-production.up.railway.app)
+- **Gateway URL**: [https://engce301-final-lab2-production.up.railway.app](https://engce301-final-lab2-66543206012-7-66543206023-production.up.railway.app)
 
 ## Phase 5: Gateway Strategy
 
@@ -29,21 +29,21 @@
 ## คำสั่งที่ใช้ในการทดสอบ
 ### Register
 ```sh
-curl -X POST https://auth-service-production-559c.up.railway.app/api/auth/register \
+curl -X POST https://auth-production-ab99.up.railway.app/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"username":"myuser","password":"mypass","email":"my@email.com"}'
 ```
 
 ### Login → เก็บ token
 ```sh
-TOKEN=$(curl -s -X POST https://auth-service-production-559c.up.railway.app/api/auth/login \
+TOKEN=$(curl -s -X POST https://auth-production-ab99.up.railway.app/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"my@email.com","password":"mypass"}' | jq -r '.token')
 ```
 
 ### Create Task
 ```sh
-curl -X POST https://task-service-production-b94a.up.railway.app/api/tasks \
+curl -X POST https://task-production-93b7.up.railway.app/api/tasks \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"title":"My first cloud task"}'
@@ -51,13 +51,13 @@ curl -X POST https://task-service-production-b94a.up.railway.app/api/tasks \
 
 ### Get Profile
 ```sh
-curl https://user-service-production-bf73.up.railway.app/api/users/profile \
+curl https://user-production-a874.up.railway.app/api/users/profile \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 ### Test 401
 ```sh
-curl https://task-service-production-b94a.up.railway.app/api/tasks   # ไม่ใส่ token → ต้องได้ 401
+curl https://user-production-a874.up.railway.app/api/tasks   # ไม่ใส่ token → ต้องได้ 401
 ```
 
 ---
